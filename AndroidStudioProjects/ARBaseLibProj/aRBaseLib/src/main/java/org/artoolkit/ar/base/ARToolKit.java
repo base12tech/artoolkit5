@@ -186,9 +186,12 @@ public class ARToolKit {
             return false;
         }
 
-        debugImageData = new byte[frameWidth * frameHeight * 4];
-        debugImageColors = new int[frameWidth * frameHeight];
-        debugBitmap = Bitmap.createBitmap(frameWidth, frameHeight, Bitmap.Config.ARGB_8888);
+        /////D debugImageData = new byte[frameWidth * frameHeight * 4];
+        debugImageData = new byte[videoWidth * videoHeight * 4];
+        /////D debugImageColors = new int[frameWidth * frameHeight];
+        debugImageColors = new int[videoWidth * videoHeight];
+        ////D  debugBitmap = Bitmap.createBitmap(frameWidth, frameHeight, Bitmap.Config.ARGB_8888);
+        debugBitmap = Bitmap.createBitmap(videoWidth, videoHeight, Bitmap.Config.ARGB_8888);
 
         return true;
     }
@@ -346,7 +349,8 @@ public class ARToolKit {
      */
     public boolean convertAndDetect1(byte[] frame, int frameSize) {
 
-        if ((!isNativeInited()) || (frame == null)) {
+        ////D   if ((!isNativeInited()) || (frame == null)) {
+        if ((!initedNative) || (frame == null)) {
             return false;
         }
 
@@ -369,11 +373,15 @@ public class ARToolKit {
      */
     public boolean convertAndDetect2(ByteBuffer[] framePlanes, int[] framePlanePixelStrides, int[] framePlaneRowStrides) {
 
-        if ((!isNativeInited()) || (framePlanes == null)) {
-            return false;
-        }
+
+        ////D  if ((!isNativeInited()) || (framePlanes == null)) { ///changed from isNativeInited to initedNative I THINK???
+        if ((!initedNative) || (framePlanes == null)) {
+                return false;
+            }
+        ////}
 
         int framePlaneCount = Math.min(framePlanes.length, 4); // Maximum 4 planes can be passed to native.
+
         if (framePlaneCount == 1) {
             if (NativeInterface.arwAndroidVideoPush2(0,
                     framePlanes[0], framePlanePixelStrides[0], framePlaneRowStrides[0],

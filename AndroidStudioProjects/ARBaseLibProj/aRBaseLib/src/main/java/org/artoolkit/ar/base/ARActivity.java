@@ -339,21 +339,23 @@ public abstract class ARActivity extends /*AppCompat*/Activity implements Camera
         return glView;
     }
 
-    @Override
-    public void cameraPreviewStarted(int width, int height, int rate, int cameraIndex, boolean cameraIsFrontFacing) {
-
-        if (ARToolKit.getInstance().startWithPushedVideo(width, height, null, cameraIndex, cameraIsFrontFacing)) {
-            // Expects Data to be already in the cache dir. This can be done with the AssetUnpacker.
-            Log.i(TAG, "cameraPreviewStarted(): Camera initialised");
-        } else {
+    ////@Override
+    ////public void cameraPreviewStarted(int width, int height, int rate, int cameraIndex, boolean cameraIsFrontFacing) {
+       //// System.out.print(width);
+        //DDDif (ARToolKit.getInstance().startWithPushedVideo(width, height, null, cameraIndex, cameraIsFrontFacing)) {
+        //////D  if (ARToolKit.getInstance().startWithPushedVideo(width, height, "Test", cameraIndex, cameraIsFrontFacing)) {
+        // Expects Data to be already in the cache dir. This can be done with the AssetUnpacker.
+         ////D   Log.i(TAG, "cameraPreviewStarted(): Camera initialised");
+        /////D} else {
             // Error
-            Log.e(TAG, "cameraPreviewStarted(): Error initialising camera. Cannot continue.");
-            finish();
-        }
-
-        Toast.makeText(this, "Camera settings: " + width + "x" + height + "@" + rate + "fps", Toast.LENGTH_SHORT).show();
-        firstUpdate = true;
-    }
+         ////D   Log.e(TAG, "cameraPreviewStarted(): Error initialising camera. Cannot continue.");
+          ////
+          ///D  finish();
+        //////D}
+        //////D
+        ////Toast.makeText(this, "Camera settings: " + width + "x" + height + "@" + rate + "fps", Toast.LENGTH_SHORT).show();
+        ////firstUpdate = true;
+    ////}
 
     @Override
     public void cameraPreviewFrame(byte[] frame, int frameSize) {
