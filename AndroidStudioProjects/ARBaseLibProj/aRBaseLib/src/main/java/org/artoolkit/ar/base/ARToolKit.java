@@ -41,7 +41,6 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.opengl.Matrix;
 import android.util.Log;
-
 import java.nio.ByteBuffer;
 
 /**
@@ -129,6 +128,7 @@ public class ARToolKit {
 	 *            native routines as the base for relative references.
 	 *            e.g. Activity.getContext().getCacheDir().getAbsolutePath()
 	 *            or Activity.getContext().getFilesDir().getAbsolutePath()
+     *                               this tests whether we we are on the NativeCamTest branch
 	 */
 	public boolean initialiseNativeWithOptions(String resourcesDirectoryPath, int pattSize, int pattCountMax) {
 		if (!loadedNative) return false;
@@ -168,7 +168,9 @@ public class ARToolKit {
 	 * @param cameraIsFrontFacing false if camera is rear-facing (the default) or true if camera is facing toward the user.
      * @return true if initialisation was successful.
      */
-    public boolean startWithPushedVideo(int videoWidth, int videoHeight, String pixelFormat, String cameraParaPath, int cameraIndex, boolean cameraIsFrontFacing) {
+    ///DD public boolean startWithPushedVideo(int videoWidth, int videoHeight, String pixelFormat, String cameraParaPath, int cameraIndex, boolean cameraIsFrontFacing) {
+    public boolean startWithPushedVideo(int videoWidth,int videoHeight, String pixelFormat, String cameraParaPath, int cameraIndex, boolean cameraIsFrontFacing){
+
 
         if (!initedNative) {
             Log.e(TAG, "startWithPushedVideo(): Cannot start because native interface not inited.");
@@ -176,7 +178,10 @@ public class ARToolKit {
         }
 
         if (!NativeInterface.arwStartRunning("", cameraParaPath, 10.0f, 10000.0f)) {
-            Log.e(TAG, "startWithPushedVideo(): Error starting");
+
+
+
+        Log.e(TAG, "startWithPushedVideo(): Error starting");
             return false;
         }
         if (0 > NativeInterface.arwAndroidVideoPushInit(0, videoWidth, videoHeight,

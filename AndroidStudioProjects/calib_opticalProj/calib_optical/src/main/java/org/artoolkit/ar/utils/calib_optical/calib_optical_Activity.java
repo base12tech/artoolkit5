@@ -75,13 +75,17 @@ public class calib_optical_Activity extends Activity {
 
     private static final String TAG = "calib_optical";
 
-    // Load the native libraries.
-    static {
+    // Load the native libraries. I DONT THINK THESE EXIST???
+     static {
         System.loadLibrary("c++_shared");
-        System.loadLibrary("calib_optical_Native");
+       //DD System.loadLibrary("c++");
+
+       //DD  System.loadLibrary("calib_optical_Native");
+        System.loadLibrary("calib_optical");
+
     }
 
-    public static final int REQUEST_CAMERA_PERMISSION_RESULT = 0;
+    public static final int REQUEST_CAMERA_PERMISSION_RESULT = 1;
 
     // Lifecycle functions.
     public static native boolean nativeCreate(Context ctx);
